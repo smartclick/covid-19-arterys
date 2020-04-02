@@ -1,0 +1,12 @@
+version: "3.5"
+services:
+  dev:
+    build:
+      context: .
+    container_name: smartclick-covid19-server
+    working_dir: /opt
+    volumes:
+      - ./:/opt
+    ports:
+      - 8900:8000
+

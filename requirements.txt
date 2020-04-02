@@ -1,0 +1,8 @@
+flask
+numpy
+pydicom
+pyyaml
+requests-toolbelt
+SimpleITK
+torch
+torchvision
