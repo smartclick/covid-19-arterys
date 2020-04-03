@@ -37,7 +37,7 @@ For invalid or not x-ray images result object contains only  `result: Invalid Im
         {
             "result": "POSITIVE", 
             "type": "Not Healthy", 
-            "probability": "65.59"
+            "probability": 65.59
         }
     ]
 }
