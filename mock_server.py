@@ -59,7 +59,7 @@ def get_prediction_covid(dicom_instances):
                 {
                     'result': result_data['result'],
                     'type': result_data['type'],
-                    'probability': str(round(result_data['probability'], 2))
+                    'probability': round(result_data['probability'], 2)
                 }
             )
 
