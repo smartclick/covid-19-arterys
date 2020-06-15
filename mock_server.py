@@ -32,7 +32,8 @@ def handle_exception(e):
 def get_empty_response():
     response_json = {
         'protocol_version': '1.0',
-        'parts': []
+        'parts': [],
+        'bounding_boxes_2d': []
     }
     return response_json, []
 
@@ -40,26 +41,35 @@ def get_empty_response():
 def get_prediction_covid(dicom_instances):
     response_json = {
         'protocol_version': '1.0',
-        'parts': []
+        'parts': [],
+        'bounding_boxes_2d': []
     }
     for dicom_file in dicom_instances:
 
         dcm = pydicom.read_file(dicom_file)
+
+        image_width = dcm.Columns
+        image_height = dcm.Rows
+
         dataset = dcm.pixel_array
         img = Image.fromarray(dataset)
         result_data = x_ray.predict(img)
         if result_data['result'] == 'RANDOM':
-            response_json['parts'].append(
+            response_json['bounding_boxes_2d'].append(
                 {
-                    'result': "Invalid Image"
+                    "label": "Not detected",
+                    "SOPInstanceUID": dcm.SOPInstanceUID,
+                    "top_left": [0, 0],
+                    "bottom_right": [image_width, image_height]
                 }
             )
         else:
-            response_json['parts'].append(
+            response_json['bounding_boxes_2d'].append(
                 {
-                    'result': result_data['result'],
-                    'type': result_data['type'],
-                    'probability': round(result_data['probability'], 2)
+                    "label": result_data['type'],
+                    "SOPInstanceUID": dcm.SOPInstanceUID,
+                    "top_left": [0, 0],
+                    "bottom_right": [image_width, image_height]
                 }
             )
 
