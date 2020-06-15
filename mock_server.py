@@ -74,10 +74,7 @@ def request_handler(json_input, dicom_instances, input_digest):
     transaction_logger.add_tags({'input_hash': input_digest})
     transaction_logger.info('mock_model received json_input={}'.format(json_input))
 
-    if json_input['inference_command'] == 'covid19':
-        return get_prediction_covid(dicom_instances)
-    else:
-        return get_empty_response()
+    return get_prediction_covid(dicom_instances)
 
 
 if __name__ == '__main__':
