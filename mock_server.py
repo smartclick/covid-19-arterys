@@ -58,6 +58,7 @@ def get_prediction_covid(dicom_instances):
             response_json['bounding_boxes_2d'].append(
                 {
                     "label": "Not detected",
+                    "probability": 0,
                     "SOPInstanceUID": dcm.SOPInstanceUID,
                     "top_left": [0, 0],
                     "bottom_right": [image_width, image_height]
@@ -67,6 +68,7 @@ def get_prediction_covid(dicom_instances):
             response_json['bounding_boxes_2d'].append(
                 {
                     "label": result_data['type'],
+                    "probability": round(result_data['probability'], 2),
                     "SOPInstanceUID": dcm.SOPInstanceUID,
                     "top_left": [0, 0],
                     "bottom_right": [image_width, image_height]

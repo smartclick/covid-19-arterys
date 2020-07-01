@@ -18,28 +18,26 @@ For each input image program return one item in the `parts` array.
 ```
 {
     "protocol_version":"1.0",
-    "parts": []
+    "bounding_boxes_2d": []
 }
 ```
 
 If image is x-ray result will be object with:  
-`result : POSITIVE or NEGATIVE`  
-`type : Not Healthy or Healthy`  
+`label : Not Healthy or Healthy`  
 `probability : a number from 0 to 100`  
 
-For invalid or not x-ray images result object contains only  `result: Invalid Image`
 
 #### One image request output example
 ```
 {
     "protocol_version":"1.0",
-    "parts": [
-        {
-            "result": "POSITIVE", 
-            "type": "Not Healthy", 
-            "probability": 65.59
-        }
-    ]
+    "bounding_boxes_2d": [{ 
+        "label": "Not Healthy", 
+        "probability": 65.59,
+        "SOPInstanceUID": "2.25.336451217722347364678629652826931415692", 
+        "top_left": [0, 0], 
+        "bottom_right": [1024, 1024]
+    }]
 }
 ```
 
